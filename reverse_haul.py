@@ -33,8 +33,8 @@ def get_data(path):
 
     df = pd.merge(df1, df2, on=['center_station'])
 
-    df_new = df[(df.Delivery_Date1 >= df.Dispatch_Date2) & (df.Dispatch_lat_long1 == df.Dispatch_lat_long2)]
-    df_new['time_gap'] = df_new['Delivery_Date1'] - df_new['Dispatch_Date2']
+    df_new = df[(df.Delivery_Date1 <= df.Dispatch_Date2) & (df.Dispatch_lat_long1 == df.Dispatch_lat_long2)]
+    df_new['time_gap'] = df_new['Dispatch_Date2'] - df_new['Delivery_Date1']
     df_new = df_new.sort_values('time_gap')
     df_temp = df_new.copy()
 
